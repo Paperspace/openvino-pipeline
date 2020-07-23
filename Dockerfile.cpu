@@ -1,0 +1,10 @@
+FROM ubuntu:1
+COPY ./requirement.txt ./requirement.txt
+RUN pip install -r requirement.txt
+RUN pip install hydra-core --pre --upgrade
+RUN pip install tensorboard
+RUN pip install tensorboardx
+
+
+
+CMD ["/bin/sh"]

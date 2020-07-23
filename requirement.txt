@@ -1,0 +1,7 @@
+fastai
+gradient
+beautifulsoup4==4.7.1
+torchvision==0.5.0
+torch==1.4
+
+requests

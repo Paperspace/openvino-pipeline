@@ -1,0 +1,15 @@
+dataset:
+  raw: /storage/data/dibas_zips/
+  file: /storage/data/dibas_images/
+  url: http://misztal.edu.pl/software/databases/dibas/
+
+train: 
+  learn_cycle: 8
+  backbone: resnet50
+  
+pipeline: 
+  dataset: True
+  train: True
+  export: True
+  deploy: False
+  test: False
