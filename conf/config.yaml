@@ -4,7 +4,7 @@ dataset:
   url: http://misztal.edu.pl/software/databases/dibas/
 
 train: 
-  learn_cycle: 8
+  learn_cycle: 5
   backbone: resnet50
   
 pipeline: 
