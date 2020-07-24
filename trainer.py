@@ -96,12 +96,7 @@ def train_model(cfg: DictConfig):
     import json
 
     gradient_metadata = {}
-    gradient_metadata['metrics'] = []
-    gradient_metadata['metrics'].append({
-        'MSE': errors.data.tolist(),
-        #'Accuracy': top_k_accuracy.double(),
-        #'from': 'Nebraska'
-    })
+    gradient_metadata['MSE'] = errors.data.tolist()
 
     with open('/artifacts/gradient-model-metadata.json', 'w') as outfile:
         json.dump(gradient_metadata, outfile)
@@ -131,7 +126,7 @@ def export_to_open_vino(cfg: DictConfig):
 def my_app(cfg : DictConfig) -> None:
     log.info(cfg.pretty())
     #pull_data(cfg.dataset)
-    #validate_data(cfg.dataset)
+    validate_data(cfg.dataset)
     train_model(cfg)
     export_to_open_vino(cfg)
     #deploy_as_endpoint(cfg)
