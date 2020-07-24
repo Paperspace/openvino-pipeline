@@ -50,40 +50,24 @@ def train_model(cfg: DictConfig):
     data = ImageDataBunch.from_name_re(cfg.dataset.file, fnames, pat, ds_tfms=get_transforms(), size=24, bs=bs).normalize(imagenet_stats)
     print(data)
     #print(data.shape)
-    #data.show_batch(rows=3, figsize=(7,8))
     learn = create_cnn(data, models.resnet34, metrics=accuracy)
     #learn = create_cnn(data, models.resnet50, metrics=error_rate)
-    #project_id = 'projct1'
-    ##tboard_path = Path('data/tensorboard/' + project_id)
-
-    writer = SummaryWriter(comment='Demo', log_dir='/artifacts')
-
-    # Track_weight and track_grad are used to decide if weights and gradients will be logged in TensorBoard
-    # Metric names are names to be displayed in Tensorboard. The first is always validation loss
-    # The order of metric names has to be the same than in learn.metrics
-    #mycallback = partial(TensorBoardFastAI, writer, track_weight=True, track_grad=True, show_images=True, metric_names=['val loss', 'accuracy'])
-    #learn.callback_fns.append(mycallback)
     
     learn.lr_find()
     #learn.recorder.plot()
     learn.callback_fns.append(partial(ImageGenTensorboardWriter, base_dir='/artifacts/', name='run1'))
 
-    learn.fit_one_cycle(4)
-
-
-    #learn.fit_one_cycle(8)
+    learn.fit_one_cycle(cfg.train.learn_cycle)
 
     path = learn.save('stage-1-50', True)
     learn.unfreeze()
     learn.fit_one_cycle(3, max_lr=slice(1e-6,1e-4))
 
-    #learn.load('stage-1-50');
-# interp = ClassificationInterpretation.from_learner(learn)
-# interp.plot_confusion_matrix(data.classes)
-
     preds,y,losses = learn.get_preds(with_loss=True)
     interp = ClassificationInterpretation(learn, preds, y, losses)
     interp.plot_top_losses(9, figsize=(7,7))
+
+    # interp.plot_confusion_matrix(data.classes)
 
     print(preds)
     print(y)
@@ -120,6 +104,10 @@ def train_model(cfg: DictConfig):
 def export_to_open_vino(cfg: DictConfig):
     model_name = "/artifacts/bacteria_classifier.onnx"
     os.system("python /model-optimizer/mo.py --input_model /artifacts/bacteria_classifier.onnx --output_dir /artifacts/1/")
+
+def deploy_as_endpoint(cdf: DictConfig):
+    os.system("gradient deployments create --optionsFile ./ps_project/openvino_deployment.yaml")
+
 
 
 @hydra.main(config_path="conf", config_name="config")
