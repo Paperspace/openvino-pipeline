@@ -122,24 +122,18 @@ def train_model(cfg: DictConfig):
     return path
 
 
-def export_to_open_vino(cfg: DictConfig, model_path: str):
-    from torch.autograd import Variable
-    sz = 24
-    model = torch.load(model_path)
+def export_to_open_vino(cfg: DictConfig):
     model_name = "/artifacts/bacteria_classifier.onnx"
-
-    dummy_input = Variable(torch.randn(1, 3, sz, sz)) # for iOS app, we predict only 1 image at a time, we don't use batch
-    torch.onnx.export(learn.model, dummy_input, model_name, \
-                    input_names=['image'], output_names=['bacterialclassifier'], verbose=True)
+    os.system("python /model-optimizer/mo.py --input_model /artifacts/bacteria_classifier.onnx --output_dir /artifacts/1/")
 
 
 @hydra.main(config_path="conf", config_name="config")
 def my_app(cfg : DictConfig) -> None:
     log.info(cfg.pretty())
     #pull_data(cfg.dataset)
-    validate_data(cfg.dataset)
+    #validate_data(cfg.dataset)
     train_model(cfg)
-    #export_model(cfg)
+    export_to_open_vino(cfg)
     #deploy_as_endpoint(cfg)
     #make_queries(cfg)
 

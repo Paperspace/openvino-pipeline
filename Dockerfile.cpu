@@ -5,5 +5,8 @@ RUN pip install hydra-core --pre --upgrade
 RUN pip install tensorboard
 RUN pip install tensorboardx
 
+COPY ./model-optimizer ./model-optimizer
+#RUN ./model-optimizer/install_prerequisites/install_prerequisites.sh
+RUN python3 -m pip install -r ./model-optimizer/requirements_onnx.txt
 
 CMD ["/bin/sh"]
