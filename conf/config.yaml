@@ -8,7 +8,7 @@ train:
   backbone: resnet50
   
 pipeline: 
-  dataset: True
+  dataset: False
   train: True
   export: True
   deploy: False
