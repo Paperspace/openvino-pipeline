@@ -108,8 +108,6 @@ def export_to_open_vino(cfg: DictConfig):
 def deploy_as_endpoint(cdf: DictConfig):
     os.system("gradient deployments create --optionsFile ./ps_project/openvino_deployment.yaml")
 
-
-
 @hydra.main(config_path="conf", config_name="config")
 def my_app(cfg : DictConfig) -> None:
     log.info(cfg.pretty())
