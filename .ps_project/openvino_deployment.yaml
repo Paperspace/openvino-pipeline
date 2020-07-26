@@ -6,7 +6,7 @@ authUsername: null
 clusterId: cl1nurf0i
 command: /ie-serving-py/start_server.sh ie_serving model --model_path /models/model --model_name bacteria_classifier --port 9001 --rest_port 8001
 containerModelPath: /models/model
-containerUrlPath: null
+containerUrlPath: /v1/models/bacteria_classifier
 deploymentType: Custom
 dockerArgs: null
 env: null
@@ -20,7 +20,7 @@ maxInstanceCount: 5
 method: null
 metric: null
 minInstanceCount: 1
-modelId: mo5jw0004d550c
+modelId: mos3wy4umvvtnks
 name: open-vino-server
 ports: 8001
 projectId: prs3cl0zp
