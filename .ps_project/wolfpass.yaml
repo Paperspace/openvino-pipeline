@@ -8,3 +8,5 @@ name: fastai-pipeline
 projectId: prs3cl0zp
 workspace: ./
 ignoreFiles: model-optimizer/*
+experimentEnv: 
+  apiKey_openvino: 'secret:apiKey_openvino'
