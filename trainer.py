@@ -106,16 +106,16 @@ def export_to_open_vino(cfg: DictConfig):
     os.system("python /model-optimizer/mo.py --input_model /artifacts/bacteria_classifier.onnx --output_dir /artifacts/1/")
 
 def deploy_as_endpoint(cdf: DictConfig):
-    os.system("gradient deployments create --optionsFile ./ps_project/openvino_deployment.yaml")
+    os.system("gradient deployments create --optionsFile ./ps_project/openvino_deployment.yaml --apiKey "+os.getenv('apiKey_openvino')")
 
 @hydra.main(config_path="conf", config_name="config")
 def my_app(cfg : DictConfig) -> None:
     log.info(cfg.pretty())
-    #pull_data(cfg.dataset)
+    pull_data(cfg.dataset)
     validate_data(cfg.dataset)
     train_model(cfg)
     export_to_open_vino(cfg)
-    #deploy_as_endpoint(cfg)
+    deploy_as_endpoint(cfg)
     #make_queries(cfg)
 
 if __name__ == "__main__":

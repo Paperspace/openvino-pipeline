@@ -6,7 +6,8 @@ dataset:
 train: 
   learn_cycle: 8
   backbone: resnet50
-  
+  class: torchvision.models.resnet50
+
 pipeline: 
   dataset: True
   train: True

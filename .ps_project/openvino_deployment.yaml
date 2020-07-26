@@ -1,8 +1,9 @@
+apiKey: null
 apiType: null
 auth: false
 authPassword: null
 authUsername: null
-clusterId: cl03ag76f
+clusterId: cl1nurf0i
 command: /ie-serving-py/start_server.sh ie_serving model --model_path /models/model --model_name bacteria_classifier --port 9001 --rest_port 8001
 containerModelPath: /models/model
 containerUrlPath: null
@@ -14,15 +15,20 @@ imageServer: null
 imageUrl: intelaipg/openvino-model-server
 imageUsername: null
 instanceCount: 1
-machineType: Wolfpass-CPU
+machineType: metal-cpu
+maxInstanceCount: 5
 method: null
+metric: null
+minInstanceCount: 1
 modelId: mo5jw0004d550c
 name: open-vino-server
 ports: 8001
 projectId: prs3cl0zp
+resource: cpuPercentage/targetAverage:0.2
+scaleCooldownPeriod: null
 tag: null
 tags: null
-workspace: none
+workspace: null
 workspacePassword: null
 workspaceRef: null
 workspaceUsername: null
