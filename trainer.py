@@ -109,7 +109,7 @@ def deploy_as_endpoint(cdf: DictConfig):
     from gradient import SdkClient
     client = SdkClient(os.getenv('apiKey_openvino'))
     
-    os.system("gradient deployments create --optionsFile /code/./ps_project/openvino_deployment.yaml --apiKey "+os.getenv('apiKey_openvino'))
+    os.system("gradient deployments create --optionsFile /code/.ps_project/openvino_deployment.yaml --apiKey "+os.getenv('apiKey_openvino'))
 
 @hydra.main(config_path="conf", config_name="config")
 def my_app(cfg : DictConfig) -> None:
