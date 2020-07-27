@@ -14,3 +14,26 @@ pipeline:
   export: True
   deploy: False
   test: False
+
+deployment: 
+  clusterId: cl1nurf0i
+  command: /ie-serving-py/start_server.sh ie_serving model --model_path /models/model --model_name bacteria_classifier --port 9001 --rest_port 8001
+  containerModelPath: /models/model
+  containerUrlPath: /v1/models/bacteria_classifier
+  deploymentType: Custom
+  imageUrl: intelaipg/openvino-model-server
+  instanceCount: 1
+  machineType: metal-cpu
+  maxInstanceCount: 5
+  method: null
+  metric: null
+  minInstanceCount: 1
+  modelId: mos3wy4umvvtnks
+  name: open-vino-server
+  ports: 8001
+  projectId: prs3cl0zp
+  resource: cpuPercentage/targetAverage:0.2
+  scaleCooldownPeriod: null
+  tag: null
+
+

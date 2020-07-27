@@ -1,0 +1,12 @@
+machineType: C5
+clusterId : clpvt0s6x
+command: python trainer.py
+container: paperspace/openvinopipeline:mo
+modelPath: /artifacts
+modelType: Custom
+name: fastai-pipeline
+projectId: prs3cl0zp
+workspace: ./
+ignoreFiles: model-optimizer/*
+experimentEnv: 
+  apiKey_openvino: 'secret:apiKey_openvino'
