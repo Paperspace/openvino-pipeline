@@ -115,10 +115,10 @@ def deploy_as_endpoint(cdf: DictConfig):
 def my_app(cfg : DictConfig) -> None:
     log.info(cfg.pretty())
     #pull_data(cfg.dataset)
-    #validate_data(cfg.dataset)
-    #train_model(cfg)
-    #export_to_open_vino(cfg)
-    deploy_as_endpoint(cfg)
+    validate_data(cfg.dataset)
+    train_model(cfg)
+    export_to_open_vino(cfg)
+    #deploy_as_endpoint(cfg)
     #make_queries(cfg)
 
 if __name__ == "__main__":
