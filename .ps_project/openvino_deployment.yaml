@@ -3,7 +3,7 @@ apiType: null
 auth: false
 authPassword: null
 authUsername: null
-clusterId: cl1nurf0i
+clusterId: clpvt0s6x
 command: /ie-serving-py/start_server.sh ie_serving model --model_path /models/model --model_name bacteria_classifier --port 9001 --rest_port 8001
 containerModelPath: /models/model
 containerUrlPath: /v1/models/bacteria_classifier
@@ -15,7 +15,7 @@ imageServer: null
 imageUrl: intelaipg/openvino-model-server
 imageUsername: null
 instanceCount: 1
-machineType: metal-cpu
+machineType: C5
 maxInstanceCount: 5
 method: null
 metric: null
