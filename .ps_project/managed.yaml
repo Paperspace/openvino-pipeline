@@ -4,7 +4,7 @@ command: python trainer.py
 datasets:
   - name: dibas_images
     uri: s3://gradient-datasets/bacteria_data.zip    
-    #etag: 62ff7d7fbcc7e0c0604cbb0f9047ce77-2306
+    etag: ''
 container: paperspace/openvinopipeline:mo
 modelPath: /artifacts
 modelType: Custom
