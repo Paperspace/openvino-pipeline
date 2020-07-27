@@ -8,7 +8,6 @@ workflows:
         checks: #[optional]
           custom:MSE:
              target: "0.0..0.4"
-             aggregate: "mean"
           defaults: #[optional]
               precision: 3
     triggers:
