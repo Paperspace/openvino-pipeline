@@ -3,8 +3,8 @@ clusterId : clpvt0s6x
 command: python trainer.py
 datasets:
   - name: dibas_images
-    uri: s3://gradient-datasets/dibas_images
-    etag: ''
+    uri: s3:///gradient-datasets/image
+    #etag: etag-here
 container: paperspace/openvinopipeline:mo
 modelPath: /artifacts
 modelType: Custom
