@@ -4,7 +4,7 @@ command: python trainer.py
 container: paperspace/openvinopipeline:mo
 modelPath: /artifacts
 modelType: Custom
-name: fastai-pipeline
+name: fastai-pipeline-test
 projectId: prs3cl0zp
 workspace: ./
 ignoreFiles: model-optimizer/*
