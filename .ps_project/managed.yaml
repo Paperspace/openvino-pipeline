@@ -4,7 +4,7 @@ command: python trainer.py
 datasets:
   - name: dibas_images
     uri: s3:///gradient-datasets/image
-    etag: 
+    etag: ''
 container: paperspace/openvinopipeline:mo
 modelPath: /artifacts
 modelType: Custom
