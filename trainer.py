@@ -50,8 +50,8 @@ def train_model(cfg: DictConfig):
     data = ImageDataBunch.from_name_re(cfg.dataset.file, fnames, pat, ds_tfms=get_transforms(), size=24, bs=bs).normalize(imagenet_stats)
     print(data)
     #print(data.shape)
-    learn = create_cnn(data, models.resnet34, metrics=accuracy)
-    #learn = create_cnn(data, models.resnet50, metrics=error_rate)
+    #learn = create_cnn(data, models.resnet34, metrics=accuracy)
+    learn = create_cnn(data, models.resnet50, metrics=error_rate)
     
     learn.lr_find()
     #learn.recorder.plot()
