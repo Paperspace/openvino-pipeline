@@ -5,16 +5,16 @@ workflows:
       - name: openvino-pipeline
         command: experiment.run_single_node
         paramsFile: .ps_project/managed.yaml
+        checks: #[optional]
+          custom:MSE:
+             target: "0.0..0.4"
+             aggregate: "mean"
+          defaults: #[optional]
+              precision: 3
     triggers:
         branches:
-            only: .*
+          only: .*
         tags:
-            only:
+          only:
             - v.*
             - latest
-    checks: #[optional]
-        custom:MSE:
-            target: "0.0..0.5"
-            aggregate: "mean"
-        defaults: #[optional]
-            precision: 3
