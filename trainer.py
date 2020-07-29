@@ -80,7 +80,7 @@ def train_model(cfg: DictConfig):
     import json
 
     gradient_metadata = {}
-    gradient_metadata['error_rate'] = errors.data.tolist()
+    gradient_metadata['accuracy'] = errors.data.tolist()
 
     with open('/artifacts/gradient-model-metadata.json', 'w') as outfile:
         json.dump(gradient_metadata, outfile)

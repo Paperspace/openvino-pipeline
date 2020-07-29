@@ -4,11 +4,11 @@ workflows:
     steps:
       - name: openvino-pipeline
         command: experiment.run_single_node
-        paramsFile: .ps_project/managed.yaml
+        paramsFile: .ps_project/wolfpass.yaml
         checks: #[optional]
           custom:MSE:
-             target: "0.0..0.5"
-             aggregate: /MSE
+             target: "0.8..1"
+             aggregate: /accuracy
           defaults: #[optional]
               precision: 3
     triggers:
