@@ -129,7 +129,7 @@ while iteration <= iterations:
         if args.get('model_version') is not None:
             version = "/versions/{}".format(args.get('model_version'))
         start_time = datetime.datetime.now()
-        result = requests.post("{}/v1/models/{}{}:predict".format(args['rest_url'], args['model_name'], version), data=data_json)
+        result = requests.post("https://clpvt0s6x.paperspacegradient.com/model-serving/deqj8z1ium0gi1:predict", data=data_json)
         end_time = datetime.datetime.now()
         try:
             result_dict = json.loads(result.text)
