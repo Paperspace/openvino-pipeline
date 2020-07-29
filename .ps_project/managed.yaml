@@ -1,4 +1,4 @@
-machineType: C5
+machineType: P4000
 clusterId : clpvt0s6x
 command: python trainer.py
 container: paperspace/openvinopipeline:mo

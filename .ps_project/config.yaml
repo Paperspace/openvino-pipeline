@@ -7,10 +7,10 @@ workflows:
         paramsFile: .ps_project/managed.yaml
         checks: #[optional]
           custom:MSE:
-             target: "0.0..0.5"
+             target: "0.0..0.4"
              aggregate: /MSE
           defaults: #[optional]
-              precision: 2
+              precision: 3
     triggers:
         branches:
           only: .*
