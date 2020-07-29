@@ -1,5 +1,5 @@
-machineType: metal-cpu
-clusterId : cl1nurf0i
+machineType: Wolfpass-CPU
+clusterId : cl03ag76f
 command: python trainer.py
 container: paperspace/openvinopipeline:mo
 modelPath: /artifacts
