@@ -16,6 +16,8 @@ from omegaconf import DictConfig
 from typing import Any
 from torch.autograd import Variable
 import torch
+import json
+
 log = logging.getLogger(__name__)
 
 def pull_data(dataset: DictConfig):
@@ -49,35 +51,29 @@ def train_model(cfg: DictConfig):
     pat = r'/([^/]+)_\d+.tif$'
     data = ImageDataBunch.from_name_re(cfg.dataset.file, fnames, pat, ds_tfms=get_transforms(), size=24, bs=bs).normalize(imagenet_stats)
     print(data)
-    #print(data.shape)
-    #learn = create_cnn(data, models.resnet34, metrics=accuracy)
-    learn = create_cnn(data, models.resnet50, metrics=error_rate)
+
+    learn = create_cnn(data, models.resnet34, metrics=accuracy)
+    #learn = create_cnn(data, models.resnet50, metrics=error_rate)
     
     learn.lr_find()
-    #learn.recorder.plot()
     learn.callback_fns.append(partial(ImageGenTensorboardWriter, base_dir='/artifacts/', name='run1'))
 
     learn.fit_one_cycle(cfg.train.learn_cycle)
 
     path = learn.save('stage-1-50', True)
     learn.unfreeze()
-    learn.fit_one_cycle(3, max_lr=slice(1e-6,1e-4))
+    learn.fit_one_cycle(3, max_lr=slice(1e-2,1e-1))
 
     preds,y,losses = learn.get_preds(with_loss=True)
     interp = ClassificationInterpretation(learn, preds, y, losses)
     interp.plot_top_losses(9, figsize=(7,7))
-
-    # interp.plot_confusion_matrix(data.classes)
 
     print(preds)
     print(y)
     print(losses)
     errors = error_rate(preds, y)
     log.info("MSE: "+str(errors.double()))
-    #top_k_accuracy = top_k_accuracy(preds, y, 1)
-    #log.info("Accuracy: "+top_k_accuracy)
 
-    import json
 
     gradient_metadata = {}
     gradient_metadata['MSE'] = errors.data.tolist()
