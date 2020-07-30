@@ -4,7 +4,7 @@ workflows:
     steps:
       - name: openvino-pipeline
         command: experiment.run_single_node
-        paramsFile: .ps_project/wolfpass.yaml
+        paramsFile: .ps_project/managed.yaml
         checks: #[optional]
           custom:MSE:
              target: "0.9..1"

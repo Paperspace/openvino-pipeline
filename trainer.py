@@ -118,7 +118,7 @@ def my_app(cfg : DictConfig) -> None:
     validate_data(cfg.dataset)
     
     train_model(cfg)
-    export_to_open_vino(cfg)
+    #export_to_open_vino(cfg)
     
     #deploy_as_endpoint(cfg)
     #make_queries(cfg)
