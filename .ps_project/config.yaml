@@ -7,7 +7,7 @@ workflows:
         paramsFile: .ps_project/managed.yaml
         checks: #[optional]
           custom:accuracy:
-             target: "0.8..1"
+             target: "0.98..1"
              aggregate: /result/max
           defaults: #[optional]
               precision: 3
