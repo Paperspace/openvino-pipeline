@@ -7,8 +7,8 @@ workflows:
         paramsFile: .ps_project/managed.yaml
         checks: #[optional]
           custom:MSE:
-             target: "0.9..1"
-             aggregate: /accuracy
+             target: "0.8..1"
+             aggregate: /accuracy/result/max
           defaults: #[optional]
               precision: 3
     triggers:

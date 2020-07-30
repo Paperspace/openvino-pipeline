@@ -48,7 +48,7 @@ def train_model(cfg: DictConfig):
     fnames = get_image_files(cfg.dataset.file)
     pat = r'/([^/]+)_\d+.tif$'
     data = ImageDataBunch.from_name_re(cfg.dataset.file, fnames, pat, ds_tfms=get_transforms(), size=24, bs=bs).normalize(imagenet_stats)
-    print(data)
+    log.info(data)
     #print(data.shape)
     learn = create_cnn(data, models.resnet34, metrics=error_rate)
     #learn = create_cnn(data, models.resnet50, metrics=error_rate)
@@ -61,7 +61,7 @@ def train_model(cfg: DictConfig):
 
     path = learn.save('stage-1-50', True)
     learn.unfreeze()
-    learn.fit_one_cycle(3, max_lr=slice(1e-2,1e-1))
+    learn.fit_one_cycle(3, max_lr=slice(1e-6,1e-4))
 
     preds,y,losses = learn.get_preds(with_loss=True)
     interp = ClassificationInterpretation(learn, preds, y, losses)
@@ -73,14 +73,14 @@ def train_model(cfg: DictConfig):
     print(y)
     print(losses)
     errors = error_rate(preds, y)
-    log.info("MSE: "+str(errors.double()))
+    log.info("accuracy: "+str(errors.double()))
     #top_k_accuracy = top_k_accuracy(preds, y, 1)
     #log.info("Accuracy: "+top_k_accuracy)
 
     import json
 
     gradient_metadata = {}
-    gradient_metadata['accuracy'] = errors.data.tolist()
+    gradient_metadata['accuracy']['result']['max'] = errors.data.tolist()
 
     with open('/artifacts/gradient-model-metadata.json', 'w') as outfile:
         json.dump(gradient_metadata, outfile)
@@ -118,7 +118,7 @@ def my_app(cfg : DictConfig) -> None:
     validate_data(cfg.dataset)
     
     train_model(cfg)
-    #export_to_open_vino(cfg)
+    export_to_open_vino(cfg)
     
     #deploy_as_endpoint(cfg)
     #make_queries(cfg)
