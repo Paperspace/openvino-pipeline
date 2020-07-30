@@ -7,7 +7,6 @@ import zipfile
 import matplotlib.pyplot as plt
 from fastai.vision import *
 from fastai.metrics import error_rate, mean_squared_error, top_k_accuracy
-#from fastai.callbacks.tensorboard import *
 from tbcallback import ImageGenTensorboardWriter
 from tensorboardX import SummaryWriter
 from bs4 import BeautifulSoup
