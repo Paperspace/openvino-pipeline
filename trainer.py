@@ -7,7 +7,7 @@ import zipfile
 import matplotlib.pyplot as plt
 from fastai.vision import *
 from fastai.metrics import error_rate, mean_squared_error, top_k_accuracy
-#from fastai.callbacks.tensorboard import *
+import json
 from tbcallback import ImageGenTensorboardWriter
 from tensorboardX import SummaryWriter
 from bs4 import BeautifulSoup
@@ -74,10 +74,7 @@ def train_model(cfg: DictConfig):
     print(losses)
     errors = error_rate(preds, y)
     log.info("accuracy: "+str(errors.double()))
-    #top_k_accuracy = top_k_accuracy(preds, y, 1)
-    #log.info("Accuracy: "+top_k_accuracy)
 
-    import json
 
     gradient_metadata = {}
     gradient_metadata['accuracy'] =  {
