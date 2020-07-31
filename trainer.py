@@ -51,7 +51,7 @@ def train_model(cfg: DictConfig):
     log.info(data)
     #print(data.shape)
     #learn = create_cnn(data, models.resnet34, metrics=error_rate)
-    learn = create_cnn(data, models.resnet50, metrics=error_rate)
+    learn = create_cnn(data, models.resnet50, metrics=accuracy)
     
     learn.lr_find()
     #learn.recorder.plot()
