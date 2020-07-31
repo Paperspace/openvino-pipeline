@@ -57,11 +57,12 @@ def train_model(cfg: DictConfig):
     #learn.recorder.plot()
     learn.callback_fns.append(partial(ImageGenTensorboardWriter, base_dir='/artifacts/', name='run1'))
 
-    #learn.fit_one_cycle(cfg.train.learn_cycle)
+    learn.fit_one_cycle(cfg.train.learn_cycle)
 
     path = learn.save('stage-1-50', True)
+    
     learn.unfreeze()
-    learn.fit_one_cycle(8, max_lr=slice(1e-2,1e-1))
+    learn.fit_one_cycle(3, max_lr=slice(1e-3,1e-1))
 
     preds,y,losses = learn.get_preds(with_loss=True)
     interp = ClassificationInterpretation(learn, preds, y, losses)
