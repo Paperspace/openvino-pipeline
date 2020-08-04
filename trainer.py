@@ -45,6 +45,7 @@ def validate_data(dataset: DictConfig):
 
 def train_model(cfg: DictConfig):
     bs = 64
+    log.info('testing pr')
     fnames = get_image_files(cfg.dataset.file)
     pat = r'/([^/]+)_\d+.tif$'
     data = ImageDataBunch.from_name_re(cfg.dataset.file, fnames, pat, ds_tfms=get_transforms(), size=24, bs=bs).normalize(imagenet_stats)
