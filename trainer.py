@@ -50,8 +50,7 @@ def train_model(cfg: DictConfig):
     data = ImageDataBunch.from_name_re(cfg.dataset.file, fnames, pat, ds_tfms=get_transforms(), size=24, bs=bs).normalize(imagenet_stats)
     log.info(data)
     #print(data.shape)
-    learn = create_cnn(data, models.resnet34, metrics=error_rate)
-    #learn = create_cnn(data, models.resnet50, metrics=accuracy)
+    learn = create_cnn(data, models.resnet50, metrics=accuracy)
     
     learn.lr_find()
     #learn.recorder.plot()
@@ -62,7 +61,7 @@ def train_model(cfg: DictConfig):
     path = learn.save('stage-1-50', True)
     
     learn.unfreeze()
-    learn.fit_one_cycle(3, max_lr=slice(1e-3,1e-1))
+    learn.fit_one_cycle(4, max_lr=slice(1e-3,1e-1))
 
     preds,y,losses = learn.get_preds(with_loss=True)
     interp = ClassificationInterpretation(learn, preds, y, losses)
