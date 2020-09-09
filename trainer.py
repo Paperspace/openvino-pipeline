@@ -62,7 +62,7 @@ def train_model(cfg: DictConfig):
     path = learn.save('stage-1-50', True)
     
     learn.unfreeze()
-    learn.fit_one_cycle(3, max_lr=slice(1e-3,1e-1))
+    learn.fit_one_cycle(4, max_lr=slice(1e-3,1e-1))
 
     preds,y,losses = learn.get_preds(with_loss=True)
     interp = ClassificationInterpretation(learn, preds, y, losses)
